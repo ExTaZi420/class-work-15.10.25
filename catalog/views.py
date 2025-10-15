@@ -26,6 +26,7 @@ class BookListView(generic.ListView):
 
     template_name = 'catalog/book_list.html'
 
+        
     
 
     def get_queryset(self):
@@ -35,12 +36,27 @@ class BookListView(generic.ListView):
         context =  super(BookListView, self).get_context_data(**kwargs)
         context['some_data'] = 'какие то непонятные данные'
         return context
+    
+
+        
 
 class BookDetailView(generic.DetailView):
     model = Book
     
 
+# def books(request):
+#     num_visits_book = request.session.get('num_visits_book', 0)
+#     request.session['num_visits_book'] = num_visits_book+1
+#     return render(
+#         request, "book_list.html",
+#           context={'num_visits_book':num_visits_book,})
 
+
+
+# def sessionForBook(request):
+#     count_visit = request.session.get('count_visit', 0)
+#     request.session['count_visit'] = count_visit+1
+#     return render(request, 'book_list.html', context={'count_visit':count_visit})
 
 
 

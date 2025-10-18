@@ -23,6 +23,18 @@ class Book(models.Model):
     def display_genre(self):
         return ", ".join([ genre.name for genre in self.genre.all()[:3]])
     display_genre.short_description = 'Genre'
+
+    def delete_book(self):
+        """Удаляет текущую книгу и все связанные экземпляры"""
+        # Сначала удаляем все связанные экземпляры книг
+        self.bookinstance_set.all().delete()
+        # Затем удаляем саму книгу
+        self.delete()
+    
+    def soft_delete(self):
+        """Мягкое удаление - помечает книгу как удаленную"""
+        self.is_deleted = True
+        self.save()
     
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text=" ")
@@ -60,6 +72,10 @@ class Author(models.Model):
     def __str__(self):
         return '%s, %s' % (self.last_name, self.first_name)
     
+
+
+
+
 
 
 

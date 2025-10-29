@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book List</title>
-</head>
-<body>
-    <h1>Book List</h1>
-    
-    {% if my_book_list %}
-        <ul>
-        {% for book in my_book_list %}
-            <li>{{ book.title }} by {{ book.author }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No books found.</p>
-    {% endif %}
-    
-    {% if some_data %}
-        <p>Additional data: {{ some_data }}</p>
-    {% endif %}
+<h1>Book List</h1>
 
-</body>
-</html>
+{% if my_book_list %}
+  <ul>
+    {% for book in my_book_list %}
+      <li>
+        <!-- Добавьте эту ссылку -->
+        <a href="{{ book.get_absolute_url }}">
+          {{ book.title }} by {{ book.author }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>There are no books in the library.</p>
+{% endif %}
+
+<!-- Дополнительные данные -->
+<p>Additional data: {{ some_data }}</p>
